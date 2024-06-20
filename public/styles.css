@@ -58,3 +58,15 @@
     border-bottom: 300px solid #3f2c26;
     align-self: end;
 }
+
+.initial__black__state {
+    height: 96px;
+    width: 96px;
+    background-image: url("../images/black-piece.png");
+}
+
+.initial__white__state {
+    height: 96px;
+    width: 96px;
+    background-image: url("../images/white-piece.png");
+}
