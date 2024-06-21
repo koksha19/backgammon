@@ -6,7 +6,7 @@
 #board{
     width: 1200px;
     height: 800px;
-    background-image: url("https://static.vecteezy.com/system/resources/previews/028/324/133/large_2x/real-wood-texture-with-varnished-free-photo.jpeg");
+    background-image: url("../images/background.png");
     border: 2rem solid;
     border-image: url("https://img.freepik.com/free-photo/brown-wooden-textured-flooring-background_53876-128537.jpg") 100;
     margin: 3rem;
@@ -32,41 +32,24 @@
 }
 
 .triangle {
-    width: 0;
-    height: 0;
-    border-left: 48px solid transparent;
-    border-right: 48px solid transparent;
+    width: 96px;
+    height: 350px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
 }
 
-.top__light__triangle {
-    border-top: 300px solid wheat;
-    align-self: start;
-}
-
-.bottom__light__triangle {
-    border-bottom: 300px solid wheat;
-    align-self: end;
-}
-
-.top__dark__triangle {
-    border-top: 300px solid #3f2c26;
-    align-self: start;
-}
-
-.bottom__dark__triangle {
-    border-bottom: 300px solid #3f2c26;
-    align-self: end;
+.initial__black__state, .initial__white__state {
+    height: 96px;
+    width: 96px;
+    position: absolute;
 }
 
 .initial__black__state {
-    height: 96px;
-    width: 96px;
     background-image: url("../images/black-piece.png");
 }
 
 .initial__white__state {
-    height: 96px;
-    width: 96px;
     background-image: url("../images/white-piece.png");
 }

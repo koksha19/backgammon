@@ -1,8 +1,4 @@
 const board = document.querySelector('#board')
-/*
-const intialBlackState = document.querySelector('.initial__black__state');
-const intialWhiteState = document.querySelector('.initial__white__state');
-*/
 
 const quarters = {
     secondQuarter: document.querySelector('#second__quarter'),
@@ -11,10 +7,9 @@ const quarters = {
     fourthQuarter: document.querySelector('#fourth__quarter'),
 };
 
-const drawTriangles = () => {
-    let top = 0;
-    let counter = 0;
+const divideBoard = () => {
     let id = 0;
+    let counter = 0;
     for (const quarter of Object.values(quarters)) {
         for (let i = 0; i < 6; i++) {
             const triangle = document.createElement('div');
@@ -22,30 +17,20 @@ const drawTriangles = () => {
             triangle.setAttribute('triangle-id', id.toString());
             id++;
 
-            if (top < 2 && counter % 2 === 0) {
-                triangle.classList.add('top__light__triangle');
-            } else if (top < 2 && counter % 2 !== 0) {
-                triangle.classList.add('top__dark__triangle');
-            } else if (top >= 2 && counter % 2 === 0) {
-                triangle.classList.add('bottom__light__triangle');
+            if (counter < 2) {
+               triangle.style.alignSelf = "start";
             } else {
-                triangle.classList.add('bottom__dark__triangle');
+                triangle.style.alignSelf = "end";
             }
 
             quarter.append(triangle);
-            counter += 1;
         }
-        top += 1;
-        counter += 1;
+        counter++;
     }
 }
 
 const setPieces = () => {
-    const initialBlackState = document.createElement('div');
-    const initialWhiteState = document.createElement('div');
-
     const yourStartTriangle = document.querySelector('[triangle-id="11"]');
-    console.log(yourStartTriangle);
     const opponentStartTriangle = document.querySelector('[triangle-id="12"]');
 
     for (let i = 0; i < 15; i++) {
@@ -55,13 +40,13 @@ const setPieces = () => {
         newBlackPiece.classList.add('initial__black__state');
         newWhitePiece.classList.add('initial__white__state');
 
-        initialBlackState.append(newBlackPiece);
-        initialWhiteState.append(newWhitePiece);
-    }
+        newBlackPiece.style.top = `${i * 30}px`;
+        newWhitePiece.style.bottom = `${i * 30}px`;
 
-    yourStartTriangle.append(initialBlackState);
-    opponentStartTriangle.append(initialWhiteState);
+        yourStartTriangle.append(newBlackPiece);
+        opponentStartTriangle.append(newWhitePiece);
+    }
 }
 
-drawTriangles();
+divideBoard();
 setPieces();
