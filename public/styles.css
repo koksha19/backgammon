@@ -33,23 +33,25 @@
 
 .triangle {
     width: 96px;
-    height: 350px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
+    z-index: 0;
 }
 
-.initial__black__state, .initial__white__state {
+.black__piece, .white__piece {
     height: 96px;
     width: 96px;
     position: absolute;
+    z-index: 10;
 }
 
-.initial__black__state {
+.black__piece {
     background-image: url("../images/black-piece.png");
 }
 
-.initial__white__state {
+.white__piece {
     background-image: url("../images/white-piece.png");
 }

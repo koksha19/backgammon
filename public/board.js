@@ -1,5 +1,3 @@
-const board = document.querySelector('#board')
-
 const quarters = {
     secondQuarter: document.querySelector('#second__quarter'),
     firstQuarter: document.querySelector('#first__quarter'),
@@ -37,11 +35,14 @@ const setPieces = () => {
         const newBlackPiece = document.createElement('div');
         const newWhitePiece = document.createElement('div');
 
-        newBlackPiece.classList.add('initial__black__state');
-        newWhitePiece.classList.add('initial__white__state');
+        newBlackPiece.classList.add('black__piece');
+        newWhitePiece.classList.add('white__piece');
 
-        newBlackPiece.style.top = `${i * 30}px`;
-        newWhitePiece.style.bottom = `${i * 30}px`;
+        newBlackPiece.style.top = `${i * 25}px`;
+        newWhitePiece.style.bottom = `${i * 25}px`;
+
+        newBlackPiece.draggable = true;
+        newWhitePiece.draggable = true;
 
         yourStartTriangle.append(newBlackPiece);
         opponentStartTriangle.append(newWhitePiece);
@@ -50,3 +51,5 @@ const setPieces = () => {
 
 divideBoard();
 setPieces();
+
+
