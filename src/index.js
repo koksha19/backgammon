@@ -11,24 +11,18 @@ const dragOver = (e) => {
 
 const dragDrop = (e) => {
     e.stopPropagation();
-
-    let style = draggedElement.style;
-    const isTopTriangle = (e.target.style.alignSelf === 'start');
-
     e.target.append(draggedElement);
 
+    const isTopTriangle = (e.target.style.alignSelf === 'start');
     let children = e.target.childNodes;
-    let counter = 0;
-    for (const node of children) {
-        if (isTopTriangle) {
-            style.bottom = null;
-            style.top = `${counter * 60}px`;
-        } else {
-            style.top = null;
-            style.bottom = `${counter * 60}px`;
-        }
-        counter++;
-    }
+    stylePieces(e, draggedElement, isTopTriangle, children);
+
+    const data = {
+        pieceId: draggedElement.id,
+        triangleId: e.target.getAttribute('triangle-id')
+    };
+
+    socket.send(JSON.stringify(data));
 }
 
 triangles.forEach(triangle => {

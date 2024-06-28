@@ -20,7 +20,6 @@ const divideBoard = () => {
             } else {
                 triangle.style.alignSelf = "end";
             }
-
             quarter.append(triangle);
         }
         counter++;
@@ -38,6 +37,9 @@ const setPieces = () => {
         newBlackPiece.classList.add('black__piece');
         newWhitePiece.classList.add('white__piece');
 
+        newBlackPiece.id = `black_${i}`;
+        newWhitePiece.id = `white_${i}`;
+
         newBlackPiece.style.top = `${i * 25}px`;
         newWhitePiece.style.bottom = `${i * 25}px`;
 
@@ -51,5 +53,9 @@ const setPieces = () => {
 
 divideBoard();
 setPieces();
+
+
+
+
 
 
