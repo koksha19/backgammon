@@ -1,5 +1,7 @@
 'use strict';
 
+import { socket, stylePieces } from "../public/socket.js";
+
 const triangles = document.querySelectorAll('.triangle');
 let draggedElement;
 
