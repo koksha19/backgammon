@@ -1,3 +1,5 @@
+'use strict';
+
 const quarters = {
     secondQuarter: document.querySelector('#second__quarter'),
     firstQuarter: document.querySelector('#first__quarter'),

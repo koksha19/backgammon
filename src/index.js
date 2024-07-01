@@ -1,3 +1,5 @@
+'use strict';
+
 const triangles = document.querySelectorAll('.triangle');
 let draggedElement;
 
