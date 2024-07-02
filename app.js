@@ -4,8 +4,11 @@ import WebSocket, { WebSocketServer } from 'ws';
 
 const wss = new WebSocketServer({ port: 8000 });
 
+let clientCounter = 0;
+
 wss.on('connection', (ws) => {
-    clients.push(ws);
+    clientCounter++;
+    ws.send(JSON.stringify({ type: 'clientNumber', clientNumber: clientCounter }));
     ws.on('error', console.error);
     ws.on('message', (data) => {
         console.log(JSON.parse(data));
@@ -17,5 +20,6 @@ wss.on('connection', (ws) => {
     });
     ws.on('close', () => {
         console.log('Connection closed');
-    })
+        clientCounter--;
+    });
 });

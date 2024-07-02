@@ -1,4 +1,7 @@
+import { setPieces } from "./board.js";
+
 const socket = new WebSocket('ws://127.0.0.1:8000');
+let clientNumber;
 
 const stylePieces = (e, piece, isTopTriangle, children) => {
     let style = piece.style;
@@ -21,12 +24,18 @@ socket.addEventListener('open', () => {
 
 socket.addEventListener('message', event => {
     const data = JSON.parse(event.data);
-    const piece = document.getElementById(data.pieceId);
-    const targetTriangle = document.querySelector(`[triangle-id="${data.triangleId}"]`);
-    const isTopTriangle = (targetTriangle.style.alignSelf === 'start');
-    let children = targetTriangle.childNodes;
-    targetTriangle.append(piece);
-    stylePieces(event, piece, isTopTriangle, children);
+    clientNumber = data.clientNumber;
+    if (data.type === 'clientNumber') {
+        console.log(clientNumber);
+        setPieces(clientNumber);
+    } else {
+        const piece = document.getElementById(data.pieceId);
+        const targetTriangle = document.querySelector(`[triangle-id="${data.triangleId}"]`);
+        const isTopTriangle = (targetTriangle.style.alignSelf === 'start');
+        let children = targetTriangle.childNodes;
+        targetTriangle.append(piece);
+        stylePieces(event, piece, isTopTriangle, children);
+    }
 });
 
 export { socket, stylePieces };
