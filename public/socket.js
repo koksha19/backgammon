@@ -16,7 +16,16 @@ const stylePieces = (e, piece, isTopTriangle, children) => {
         }
         counter++;
     }
-}
+};
+
+const stackPieces = (event, data) => {
+    const piece = document.getElementById(data.pieceId);
+    const targetTriangle = document.querySelector(`[triangle-id="${data.triangleId}"]`);
+    const isTopTriangle = (targetTriangle.style.alignSelf === 'start');
+    let children = targetTriangle.childNodes;
+    targetTriangle.append(piece);
+    stylePieces(event, piece, isTopTriangle, children);
+};
 
 socket.addEventListener('open', () => {
     console.log('Connected to WebSocket server');
@@ -26,15 +35,9 @@ socket.addEventListener('message', event => {
     const data = JSON.parse(event.data);
     clientNumber = data.clientNumber;
     if (data.type === 'clientNumber') {
-        console.log(clientNumber);
         setPieces(clientNumber);
     } else {
-        const piece = document.getElementById(data.pieceId);
-        const targetTriangle = document.querySelector(`[triangle-id="${data.triangleId}"]`);
-        const isTopTriangle = (targetTriangle.style.alignSelf === 'start');
-        let children = targetTriangle.childNodes;
-        targetTriangle.append(piece);
-        stylePieces(event, piece, isTopTriangle, children);
+        stackPieces(event, data);
     }
 });
 
