@@ -29,6 +29,11 @@ const stackPieces = (event, data) => {
 
 socket.addEventListener('open', () => {
     console.log('Connected to WebSocket server');
+    const data = {
+        join: true,
+        room: 1,
+    };
+    socket.send(JSON.stringify(data));
 });
 
 socket.addEventListener('message', event => {
