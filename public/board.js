@@ -1,5 +1,9 @@
 'use strict';
 
+import { socket } from "./socket.js";
+
+let id = Math.floor(Math.random() * 1000000);
+
 const quarters = {
     secondQuarter: document.querySelector('#second__quarter'),
     firstQuarter: document.querySelector('#first__quarter'),
@@ -59,9 +63,50 @@ const setPieces = (clientNumber) => {
     }
 }
 
-divideBoard();
+const createForm = () => {
+    const form = document.querySelector('#form');
 
-export { setPieces };
+    const gameId = document.createElement('p');
+    gameId.textContent = id.toString();
+
+    const dateLabel = document.createElement('label');
+    dateLabel.setAttribute('for', 'id');
+    dateLabel.textContent = 'Opponent\'s id';
+
+    const idInput = document.createElement('input');
+    idInput.setAttribute('id', 'id');
+
+    const button = document.createElement('button');
+    button.setAttribute('type', 'submit');
+    button.textContent = 'Submit';
+
+    form.appendChild(gameId);
+    form.appendChild(dateLabel);
+    form.appendChild(idInput);
+    form.appendChild(button);
+};
+
+const connectToOpponent = () => {
+    const btn = document.querySelector('button');
+    const formId = document.querySelector('#id');
+    btn.addEventListener('click', () => {
+        const opponentId = Number(formId.value);
+        const data = {
+            join: true,
+            roomId: opponentId,
+        }
+        console.log(opponentId);
+        id = Number(formId.value);
+        socket.send(JSON.stringify(data));
+    })
+}
+
+
+divideBoard();
+createForm();
+connectToOpponent();
+
+export { id, setPieces };
 
 
 

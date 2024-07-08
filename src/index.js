@@ -1,6 +1,6 @@
 'use strict';
 
-import { socket, stylePieces } from "../public/socket.js";
+import { socket, stylePieces, id } from "../public/socket.js";
 
 const TRIANGLES_NUMBER = 23;
 const triangles = document.querySelectorAll('.triangle');
@@ -28,7 +28,7 @@ const dragDrop = (e) => {
     const data = {
         pieceId: draggedElement.id,
         triangleId: opponentTriangle,
-        room: 1,
+        roomId: id,
     };
 
     socket.send(JSON.stringify(data));

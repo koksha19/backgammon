@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+body {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #board{
     width: 1200px;
     height: 800px;
@@ -54,4 +59,10 @@
 
 .white__piece {
     background-image: url("../images/white-piece.png");
+}
+
+#form {
+    margin: 100px;
+    height: 100px;
+    width: 200px;
 }

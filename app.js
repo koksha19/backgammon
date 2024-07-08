@@ -25,22 +25,22 @@ wss.on('connection', (ws) => {
     ws.on('message', (message) => {
         console.log(JSON.parse(message));
         const data = JSON.parse(message);
-        const room = data.room;
+        const roomId = data.roomId;
 
-        if (!room) {
+        if (!roomId) {
             console.error('No room specified in the message');
             return;
         }
 
         if (data.join) {
-            if (!rooms[room]) rooms[room] = {};
-            if (!rooms[room][id]) rooms[room][id] = ws;
-            console.log(`Client ${id} joined room ${room}`);
+            if (!rooms[roomId]) rooms[roomId] = {};
+            if (!rooms[roomId][id]) rooms[roomId][id] = ws;
+            console.log(`Client ${id} joined room ${roomId}`);
         } else if (!data.join){
-            for (const [, client] of Object.entries(rooms[room])) {
+            for (const [, client] of Object.entries(rooms[roomId])) {
                 if (client !== ws && client.readyState === WebSocket.OPEN) {
-                    client.send(message, {binary: false});
-                    console.log(`Message sent to client in room ${room}`);
+                    client.send(message, { binary: false });
+                    console.log(`Message sent to client in room ${roomId}`);
                 }
             }
         }

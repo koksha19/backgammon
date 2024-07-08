@@ -1,7 +1,8 @@
-import { setPieces } from "./board.js";
+import { id, setPieces } from "./board.js";
 
 const socket = new WebSocket('ws://127.0.0.1:8000');
 let clientNumber;
+
 
 const stylePieces = (e, piece, isTopTriangle, children) => {
     let style = piece.style;
@@ -27,23 +28,25 @@ const stackPieces = (event, data) => {
     stylePieces(event, piece, isTopTriangle, children);
 };
 
+
 socket.addEventListener('open', () => {
     console.log('Connected to WebSocket server');
     const data = {
         join: true,
-        room: 1,
+        roomId: id,
     };
     socket.send(JSON.stringify(data));
 });
 
 socket.addEventListener('message', event => {
     const data = JSON.parse(event.data);
-    clientNumber = data.clientNumber;
+    console.log(data);
     if (data.type === 'clientNumber') {
+        clientNumber = data.clientNumber;
         setPieces(clientNumber);
     } else {
         stackPieces(event, data);
     }
 });
 
-export { socket, stylePieces };
+export { socket, stylePieces, id };
