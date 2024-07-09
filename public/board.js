@@ -89,6 +89,7 @@ const createForm = () => {
 const connectToOpponent = () => {
     const btn = document.querySelector('button');
     const formId = document.querySelector('#id');
+    const p = document.querySelector('p');
     btn.addEventListener('click', () => {
         const opponentId = Number(formId.value);
         const data = {
@@ -98,10 +99,10 @@ const connectToOpponent = () => {
         }
         id = Number(formId.value);
         formId.value = null;
+        p.textContent = opponentId.toString();
         socket.send(JSON.stringify(data));
     })
 }
-
 
 divideBoard();
 createForm();
