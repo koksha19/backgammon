@@ -1,6 +1,6 @@
 'use strict';
 
-import { socket } from "./socket.js";
+import { socket } from "../src/socket.js";
 
 let id = Math.floor(Math.random() * 1000000);
 

@@ -1,4 +1,4 @@
-import { id, setPieces } from "./board.js";
+import { id, setPieces } from "../public/board.js";
 
 const socket = new WebSocket('ws://127.0.0.1:8000');
 let clientNumber;

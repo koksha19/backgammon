@@ -1,6 +1,6 @@
 'use strict';
 
-import { socket, stylePieces, id } from "../public/socket.js";
+import { socket, stylePieces, id } from "./socket.js";
 
 const TRIANGLES_NUMBER = 23;
 const triangles = document.querySelectorAll('.triangle');
