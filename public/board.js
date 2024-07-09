@@ -94,9 +94,10 @@ const connectToOpponent = () => {
         const data = {
             join: true,
             roomId: opponentId,
+            yourId: id,
         }
-        console.log(opponentId);
         id = Number(formId.value);
+        formId.value = null;
         socket.send(JSON.stringify(data));
     })
 }

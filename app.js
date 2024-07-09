@@ -26,6 +26,7 @@ wss.on('connection', (ws) => {
         console.log(JSON.parse(message));
         const data = JSON.parse(message);
         const roomId = data.roomId;
+        const yourId = data.yourId;
 
         if (!roomId) {
             console.error('No room specified in the message');
@@ -34,6 +35,7 @@ wss.on('connection', (ws) => {
 
         if (data.join) {
             if (!rooms[roomId]) rooms[roomId] = {};
+            delete rooms[yourId];
             if (!rooms[roomId][id]) rooms[roomId][id] = ws;
             console.log(`Client ${id} joined room ${roomId}`);
         } else if (!data.join){
@@ -44,7 +46,9 @@ wss.on('connection', (ws) => {
                 }
             }
         }
+        console.log(Object.entries(rooms));
     });
+
 
     ws.on('close', () => {
         console.log('Connection closed');
