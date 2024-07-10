@@ -1,6 +1,8 @@
 * {
     margin: 0;
     padding: 0;
+    font-size: x-large;
+    font-family: "Bebas Neue", sans-serif;
 }
 
 body {
@@ -14,7 +16,7 @@ body {
     background-image: url("../images/background.png");
     border: 2rem solid;
     border-image: url("https://img.freepik.com/free-photo/brown-wooden-textured-flooring-background_53876-128537.jpg") 100;
-    margin: 3rem;
+    margin: 1rem;
     display: flex;
     justify-content: center;
 }
@@ -62,7 +64,10 @@ body {
 }
 
 #form {
-    margin: 100px;
-    height: 100px;
-    width: 200px;
+    margin: 50px;
+    height: 200px;
+    background-color: #ea8484;
+    border-radius: 5px;
+    align-content: center;
+    box-shadow: 0 3px 5px #773b3b;
 }

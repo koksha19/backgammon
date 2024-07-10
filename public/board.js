@@ -67,13 +67,16 @@ const createForm = () => {
     const form = document.querySelector('#form');
 
     const gameId = document.createElement('p');
-    gameId.textContent = id.toString();
+    gameId.style.margin = "1rem";
+    gameId.textContent = 'ID of this room: ' + id.toString();
 
     const dateLabel = document.createElement('label');
+    dateLabel.style.margin = "1rem";
     dateLabel.setAttribute('for', 'id');
-    dateLabel.textContent = 'Opponent\'s id';
+    dateLabel.textContent = 'Paste the room ID you want to connect to:';
 
     const idInput = document.createElement('input');
+    idInput.style.margin = "1rem";
     idInput.setAttribute('id', 'id');
 
     const button = document.createElement('button');
@@ -99,7 +102,7 @@ const connectToOpponent = () => {
         }
         id = Number(formId.value);
         formId.value = null;
-        p.textContent = opponentId.toString();
+        p.textContent = 'ID of this room: ' + opponentId.toString();
         socket.send(JSON.stringify(data));
     })
 }

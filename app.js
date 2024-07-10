@@ -7,7 +7,6 @@ const wss = new WebSocketServer({ port: 8000 });
 let clientCounter = 0;
 const rooms = {};
 
-
 wss.on('connection', (ws) => {
     const id = Date.now().toString(36) + Math.random().toString(36);
 
