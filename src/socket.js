@@ -2,7 +2,7 @@ import { id, setPieces } from "../public/board.js";
 
 const socket = new WebSocket('ws://127.0.0.1:8000');
 let clientNumber;
-
+let color;
 
 const stylePieces = (e, piece, isTopTriangle, children) => {
     let style = piece.style;
@@ -43,10 +43,16 @@ socket.addEventListener('message', event => {
     console.log(data);
     if (data.type === 'clientNumber') {
         clientNumber = data.clientNumber;
+        color = clientNumber % 2 === 0 ? 'white' : 'black';
         setPieces(clientNumber);
     } else {
         stackPieces(event, data);
     }
+    const message = {
+        roomId: id,
+        color: color,
+    }
+    socket.send(JSON.stringify(message));
 });
 
-export { socket, stylePieces, id };
+export { socket, stylePieces, id, color };

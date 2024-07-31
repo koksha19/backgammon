@@ -4,7 +4,7 @@ import WebSocket, { WebSocketServer } from 'ws';
 
 const wss = new WebSocketServer({ port: 8000 });
 
-let clientCounter = 0;
+let clientCounter = Math.floor(Math.random() * 10);
 const rooms = {};
 
 wss.on('connection', (ws) => {
@@ -26,17 +26,22 @@ wss.on('connection', (ws) => {
         const data = JSON.parse(message);
         const roomId = data.roomId;
         const yourId = data.yourId;
+        const color = data.color;
 
         if (!roomId) {
             console.error('No room specified in the message');
             return;
         }
 
+        if (color) {
+            rooms[roomId][id].color = color;
+        }
+
         if (data.join) {
             if (!rooms[roomId]) rooms[roomId] = {};
             delete rooms[yourId];
             if (!rooms[roomId][id]) rooms[roomId][id] = ws;
-            console.log(`Client ${id} joined room ${roomId}`);
+            //console.log(`Client ${id} joined room ${roomId}`);
         } else if (!data.join){
             for (const [, client] of Object.entries(rooms[roomId])) {
                 if (client !== ws && client.readyState === WebSocket.OPEN) {
@@ -45,7 +50,7 @@ wss.on('connection', (ws) => {
                 }
             }
         }
-        console.log(Object.entries(rooms));
+        console.log(rooms);
     });
 
 

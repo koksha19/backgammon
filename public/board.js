@@ -1,6 +1,6 @@
 'use strict';
 
-import { socket } from "../src/socket.js";
+import { socket, color } from "../src/socket.js";
 
 let id = Math.floor(Math.random() * 1000000);
 
@@ -81,6 +81,7 @@ const createForm = () => {
 
     const button = document.createElement('button');
     button.setAttribute('type', 'submit');
+    button.setAttribute('id', 'id_submit');
     button.textContent = 'Submit';
 
     form.appendChild(gameId);
@@ -90,7 +91,7 @@ const createForm = () => {
 };
 
 const connectToOpponent = () => {
-    const btn = document.querySelector('button');
+    const btn = document.querySelector('#id_submit');
     const formId = document.querySelector('#id');
     const p = document.querySelector('p');
     btn.addEventListener('click', () => {
@@ -106,6 +107,7 @@ const connectToOpponent = () => {
         socket.send(JSON.stringify(data));
     })
 }
+
 
 divideBoard();
 createForm();
