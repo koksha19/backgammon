@@ -2,6 +2,8 @@
 
 import { socket, color } from "../src/socket.js";
 
+const NUMBERS = ['one', 'two', 'three', 'four', 'five', 'six'];
+
 let id = Math.floor(Math.random() * 1000000);
 
 const quarters = {
@@ -90,6 +92,27 @@ const createForm = () => {
     form.appendChild(button);
 };
 
+const createDice = () => {
+    const cardDice = document.querySelector('#dice');
+
+    const p = document.createElement('p');
+    p.style.margin = "1rem";
+    p.textContent = 'Roll the dice';
+
+    const dice = document.createElement('div');
+    dice.setAttribute('id', 'images');
+
+    const button = document.createElement('button');
+    button.style.margin = "1rem";
+    button.setAttribute('type', 'submit');
+    button.setAttribute('id', 'roll');
+    button.textContent = 'Roll';
+
+    cardDice.appendChild(p);
+    cardDice.appendChild(dice);
+    cardDice.appendChild(button);
+}
+
 const connectToOpponent = () => {
     const btn = document.querySelector('#id_submit');
     const formId = document.querySelector('#id');
@@ -108,10 +131,28 @@ const connectToOpponent = () => {
     })
 }
 
+const rollDice = () => {
+    const btn = document.querySelector('#roll');
+    const images = document.querySelector('#images');
+    const firstImage = document.createElement('img');
+    const secondImage = document.createElement('img');
+
+    btn.addEventListener('click', () => {
+        const firstNumber = NUMBERS[Math.floor(Math.random()*NUMBERS.length)];
+        const secondNumber = NUMBERS[Math.floor(Math.random()*NUMBERS.length)];
+        firstImage.src = `../images/${firstNumber}.png`;
+        secondImage.src = `../images/${secondNumber}.png`;
+        images.appendChild(firstImage);
+        images.appendChild(secondImage);
+    })
+}
+
 
 divideBoard();
 createForm();
+createDice();
 connectToOpponent();
+rollDice();
 
 export { id, setPieces };
 
