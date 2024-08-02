@@ -1,4 +1,4 @@
-import { id, setPieces } from "../public/board.js";
+import { id, setPieces, showDice } from "../public/board.js";
 
 const socket = new WebSocket('ws://127.0.0.1:8000');
 let clientNumber;
@@ -45,6 +45,20 @@ socket.addEventListener('message', event => {
         clientNumber = data.clientNumber;
         color = clientNumber % 2 === 0 ? 'white' : 'black';
         setPieces(clientNumber);
+    } else if (data.opponentMove) {
+        const dice = document.querySelector('#p');
+        const images = document.querySelector('#images');
+        const p = document.createElement('p');
+        const firstImage = document.createElement('img');
+        const secondImage = document.createElement('img');
+
+        p.setAttribute('id', 'opp_move');
+        p.textContent = data.opponentMove;
+        dice.appendChild(p);
+
+        firstImage.src = data.firstImage;
+        secondImage.src = data.secondImage;
+        showDice(images, firstImage, secondImage);
     } else {
         stackPieces(event, data);
     }
@@ -55,4 +69,4 @@ socket.addEventListener('message', event => {
     socket.send(JSON.stringify(message));
 });
 
-export { socket, stylePieces, id, color };
+export { socket, stylePieces, id };

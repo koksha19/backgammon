@@ -22,7 +22,7 @@ wss.on('connection', (ws) => {
     ws.on('error', console.error);
 
     ws.on('message', (message) => {
-        console.log(JSON.parse(message));
+        //console.log(JSON.parse(message));
         const data = JSON.parse(message);
         const roomId = data.roomId;
         const yourId = data.yourId;
@@ -41,7 +41,6 @@ wss.on('connection', (ws) => {
             if (!rooms[roomId]) rooms[roomId] = {};
             delete rooms[yourId];
             if (!rooms[roomId][id]) rooms[roomId][id] = ws;
-            //console.log(`Client ${id} joined room ${roomId}`);
         } else if (!data.join){
             for (const [, client] of Object.entries(rooms[roomId])) {
                 if (client !== ws && client.readyState === WebSocket.OPEN) {
@@ -50,7 +49,7 @@ wss.on('connection', (ws) => {
                 }
             }
         }
-        console.log(rooms);
+        //console.log(rooms);
     });
 
 

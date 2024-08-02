@@ -1,6 +1,6 @@
 'use strict';
 
-import { socket, color } from "../src/socket.js";
+import { socket } from "../src/socket.js";
 
 const NUMBERS = ['one', 'two', 'three', 'four', 'five', 'six'];
 
@@ -96,6 +96,7 @@ const createDice = () => {
     const cardDice = document.querySelector('#dice');
 
     const p = document.createElement('p');
+    p.setAttribute('id', 'p');
     p.style.margin = "1rem";
     p.textContent = 'Roll the dice';
 
@@ -131,6 +132,18 @@ const connectToOpponent = () => {
     })
 }
 
+const getDieNumber = () => {
+    return NUMBERS[Math.floor(Math.random()*NUMBERS.length)];
+}
+
+const showDice = (images, firstImage, secondImage) => {
+    if (images.hasChildNodes()) {
+        images.replaceChildren();
+    }
+    images.appendChild(firstImage);
+    images.appendChild(secondImage);
+}
+
 const rollDice = () => {
     const btn = document.querySelector('#roll');
     const images = document.querySelector('#images');
@@ -138,12 +151,22 @@ const rollDice = () => {
     const secondImage = document.createElement('img');
 
     btn.addEventListener('click', () => {
-        const firstNumber = NUMBERS[Math.floor(Math.random()*NUMBERS.length)];
-        const secondNumber = NUMBERS[Math.floor(Math.random()*NUMBERS.length)];
+        const oppMove = document.querySelector('#opp_move');
+        const firstNumber = getDieNumber();
+        const secondNumber = getDieNumber();
         firstImage.src = `../images/${firstNumber}.png`;
         secondImage.src = `../images/${secondNumber}.png`;
-        images.appendChild(firstImage);
-        images.appendChild(secondImage);
+        showDice(images, firstImage, secondImage)
+        if (oppMove) {
+            oppMove.remove();
+        }
+        const data = {
+            roomId: id,
+            opponentMove: 'Opponent\'s move:',
+            firstImage: firstImage.src,
+            secondImage: secondImage.src,
+        };
+        socket.send(JSON.stringify(data));
     })
 }
 
@@ -154,7 +177,7 @@ createDice();
 connectToOpponent();
 rollDice();
 
-export { id, setPieces };
+export { id, setPieces, showDice };
 
 
 
