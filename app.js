@@ -22,7 +22,6 @@ wss.on('connection', (ws) => {
     ws.on('error', console.error);
 
     ws.on('message', (message) => {
-        //console.log(JSON.parse(message));
         const data = JSON.parse(message);
         const roomId = data.roomId;
         const yourId = data.yourId;
@@ -49,7 +48,6 @@ wss.on('connection', (ws) => {
                 }
             }
         }
-        //console.log(rooms);
     });
 
 

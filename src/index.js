@@ -7,6 +7,7 @@ const triangles = document.querySelectorAll('.triangle');
 let draggedElement;
 
 const dragStart = (e) => {
+    if (!e.target.draggable) draggedElement = undefined;
     draggedElement = e.target;
 }
 
@@ -15,6 +16,7 @@ const dragOver = (e) => {
 }
 
 const dragDrop = (e) => {
+    if (!draggedElement.draggable) return;
     e.stopPropagation();
     e.target.append(draggedElement);
 
@@ -24,13 +26,11 @@ const dragDrop = (e) => {
 
     const triangleId = Number(e.target.getAttribute('triangle-id'));
     const opponentTriangle = (TRIANGLES_NUMBER - triangleId).toString();
-
     const data = {
         pieceId: draggedElement.id,
         triangleId: opponentTriangle,
         roomId: id,
     };
-
     socket.send(JSON.stringify(data));
 }
 

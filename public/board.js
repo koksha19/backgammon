@@ -48,16 +48,15 @@ const setPieces = (clientNumber) => {
         newBlackPiece.id = `black_${i}`;
         newWhitePiece.id = `white_${i}`;
 
-        newBlackPiece.draggable = true;
-        newWhitePiece.draggable = true;
-
         if (clientNumber % 2 !== 0) {
             newBlackPiece.style.top = `${i * 25}px`;
+            newBlackPiece.draggable = true;
             newWhitePiece.style.bottom = `${i * 25}px`;
             yourStartTriangle.append(newBlackPiece);
             opponentStartTriangle.append(newWhitePiece);
         } else {
             newBlackPiece.style.bottom = `${i * 25}px`;
+            newWhitePiece.draggable = true;
             newWhitePiece.style.top = `${i * 25}px`;
             yourStartTriangle.append(newWhitePiece);
             opponentStartTriangle.append(newBlackPiece);
