@@ -39,11 +39,19 @@ socket.addEventListener('open', () => {
 });
 
 socket.addEventListener('message', event => {
+    const move = document.querySelector('#move');
     const data = JSON.parse(event.data);
     console.log(data);
     if (data.type === 'clientNumber') {
         clientNumber = data.clientNumber;
         color = clientNumber % 2 === 0 ? 'white' : 'black';
+        if (color === 'white') {
+            move.textContent = 'Your move';
+            move.style.margin = '1rem';
+        } else {
+            move.textContent = 'Wait for your opponent to make a move';
+            move.style.margin = '1rem';
+        }
         setPieces(clientNumber);
     } else if (data.opponentMove) {
         const dice = document.querySelector('#p');
@@ -61,6 +69,7 @@ socket.addEventListener('message', event => {
         showDice(images, firstImage, secondImage);
     } else {
         stackPieces(event, data);
+        move.textContent = 'Your move';
     }
     const message = {
         roomId: id,

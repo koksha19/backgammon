@@ -68,14 +68,14 @@ body {
     height: 200px;
 }
 
-#form, #dice {
+#form, #dice, #whose__move {
     border-radius: 5px;
     background-color: #ea8484;
     align-content: center;
     box-shadow: 0 3px 5px #773b3b;
 }
 
-#dice {
+#dice, #whose__move {
     margin-top: 1rem;
 }
 

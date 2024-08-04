@@ -4,6 +4,7 @@ import { socket, stylePieces, id } from "./socket.js";
 
 const TRIANGLES_NUMBER = 23;
 const triangles = document.querySelectorAll('.triangle');
+const move = document.querySelector('#move');
 let draggedElement;
 
 const dragStart = (e) => {
@@ -19,11 +20,10 @@ const dragDrop = (e) => {
     if (!draggedElement.draggable) return;
     e.stopPropagation();
     e.target.append(draggedElement);
-
     const isTopTriangle = (e.target.style.alignSelf === 'start');
     let children = e.target.childNodes;
     stylePieces(e, draggedElement, isTopTriangle, children);
-
+    move.textContent = 'Wait for your opponent to make a move';
     const triangleId = Number(e.target.getAttribute('triangle-id'));
     const opponentTriangle = (TRIANGLES_NUMBER - triangleId).toString();
     const data = {
