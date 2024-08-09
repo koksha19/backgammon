@@ -75,7 +75,7 @@ body {
     box-shadow: 0 3px 5px #773b3b;
 }
 
-#dice, #whose__move {
+#dice, #whose__move, #confirm {
     margin-top: 1rem;
 }
 
@@ -84,5 +84,9 @@ body {
     margin-left: 2rem;
 }
 
+#confirm {
+    height: 60px;
+    width: 150px;
+}
 
 

@@ -67,9 +67,10 @@ socket.addEventListener('message', event => {
         firstImage.src = data.firstImage;
         secondImage.src = data.secondImage;
         showDice(images, firstImage, secondImage);
+    } else if (data.nextMove) {
+        move.textContent = 'Your move';
     } else {
         stackPieces(event, data);
-        move.textContent = 'Your move';
     }
     const message = {
         roomId: id,

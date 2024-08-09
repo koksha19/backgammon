@@ -8,7 +8,6 @@ const move = document.querySelector('#move');
 let draggedElement;
 
 const dragStart = (e) => {
-    if (!e.target.draggable) draggedElement = undefined;
     draggedElement = e.target;
 }
 
@@ -23,7 +22,6 @@ const dragDrop = (e) => {
     const isTopTriangle = (e.target.style.alignSelf === 'start');
     let children = e.target.childNodes;
     stylePieces(e, draggedElement, isTopTriangle, children);
-    move.textContent = 'Wait for your opponent to make a move';
     const triangleId = Number(e.target.getAttribute('triangle-id'));
     const opponentTriangle = (TRIANGLES_NUMBER - triangleId).toString();
     const data = {

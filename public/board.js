@@ -166,15 +166,28 @@ const rollDice = () => {
             secondImage: secondImage.src,
         };
         socket.send(JSON.stringify(data));
-    })
+    });
 }
 
+const confirmMove = () => {
+    const btn = document.querySelector('#confirm');
+    const move = document.querySelector('#move');
+    btn.addEventListener('click', () => {
+        move.textContent = 'Wait for your opponent to make a move';
+        const data = {
+            roomId: id,
+            nextMove: true,
+        };
+        socket.send(JSON.stringify(data));
+    });
+}
 
 divideBoard();
 createForm();
 createDice();
 connectToOpponent();
 rollDice();
+confirmMove();
 
 export { id, setPieces, showDice };
 
